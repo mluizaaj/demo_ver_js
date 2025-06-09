@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const lista = [];
+
+function menu() {
+  let opcao = prompt(
+    "Escolha uma opção:\n" +
+    "1 - Cadastrar\n" +
+    "2 - Buscar\n" +
+    "3 - Listar\n" +
+    "4 - Atualizar\n" +
+    "5 - Remover"
+  );
+
+  switch(opcao) {
+    case '1':
+      cadastrar();
+      break;
+    case '2':
+      buscar();
+      break;
+    case '3':
+      listar();
+      break;
+    case '4':
+      atualizar();
+      break;
+    case '5':
+      remover();
+      break;
+    default:
+      alert("Opção inválida!");
+  }
+  menu();  // chama o menu novamente sempre
+}
+
+function cadastrar() {
+  let nome = prompt("Digite o nome para cadastrar:");
+  if (nome) {
+    lista.push(nome);
+    alert(`"${nome}" cadastrado com sucesso!`);
+  } else {
+    alert("Nome inválido.");
+  }
+}
+
+function buscar() {
+  let nome = prompt("Digite o nome para buscar:");
+  if (nome) {
+    let encontrado = lista.find(item => item.toLowerCase() === nome.toLowerCase());
+    if (encontrado) {
+      alert(`"${encontrado}" encontrado na lista.`);
+    } else {
+      alert(`"${nome}" não encontrado.`);
+    }
+  }
+}
+
+function listar() {
+  if (lista.length === 0) {
+    alert("A lista está vazia.");
+  } else {
+    alert("Lista de nomes:\n" + lista.join("\n"));
+  }
+}
+
+function atualizar() {
+  let nomeAntigo = prompt("Digite o nome que deseja atualizar:");
+  if (!nomeAntigo) {
+    alert("Nome inválido.");
+    return;
+  }
+  let index = lista.findIndex(item => item.toLowerCase() === nomeAntigo.toLowerCase());
+  if (index === -1) {
+    alert(`"${nomeAntigo}" não encontrado.`);
+    return;
+  }
+  let nomeNovo = prompt("Digite o novo nome:");
+  if (nomeNovo) {
+    lista[index] = nomeNovo;
+    alert(`"${nomeAntigo}" atualizado para "${nomeNovo}".`);
+  } else {
+    alert("Nome novo inválido.");
+  }
+}
+
+function remover() {
+  let nome = prompt("Digite o nome que deseja remover:");
+  if (!nome) {
+    alert("Nome inválido.");
+    return;
+  }
+  let index = lista.findIndex(item => item.toLowerCase() === nome.toLowerCase());
+  if (index === -1) {
+    alert(`"${nome}" não encontrado.`);
+    return;
+  }
+  if (confirm(`Tem certeza que deseja remover "${lista[index]}"?`)) {
+    lista.splice(index, 1);
+    alert(`"${nome}" removido da lista.`);
+  }
+}
+
+// Começa o programa
+menu();
+
+    </script>
+</body>
+</html>
